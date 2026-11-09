@@ -30,26 +30,28 @@ export default function HeroSection() {
           </div>
 
           <div className="hero-stage mt-3 sm:mx-auto sm:w-full sm:max-w-xl lg:mt-0">
-            <div className="absolute bottom-[10%] left-[2%] h-40 w-40 rounded-full bg-brand-blue/8 sm:h-52 sm:w-52" aria-hidden="true" />
-            <div className="hero-card-primary">
-              <div className="flex items-center justify-between bg-white px-3 py-2 text-[9px] font-semibold tracking-widest text-muted">
-                <span className="flex gap-1" aria-hidden="true"><span className="h-1.5 w-1.5 rounded-full bg-accent" /><span className="h-1.5 w-1.5 rounded-full bg-line" /><span className="h-1.5 w-1.5 rounded-full bg-line" /></span>
-                <span>ITZ-DONE / BRAND IDENTITY</span>
+            <div className="hero-collage">
+              <div className="absolute bottom-[10%] left-[2%] h-40 w-40 rounded-full bg-brand-blue/8 sm:h-52 sm:w-52" aria-hidden="true" />
+              <div className="hero-card-primary">
+                <div className="flex items-center justify-between bg-white px-3 py-2 text-[9px] font-semibold tracking-widest text-muted">
+                  <span className="flex gap-1" aria-hidden="true"><span className="h-1.5 w-1.5 rounded-full bg-accent" /><span className="h-1.5 w-1.5 rounded-full bg-line" /><span className="h-1.5 w-1.5 rounded-full bg-line" /></span>
+                  <span>ITZ-DONE / BRAND IDENTITY</span>
+                </div>
+                <div className="relative aspect-[4/5]">
+                  <Image src="/previews/hero-identity.webp" alt="ITZ-DONE brand identity applied to a glass office entrance" fill priority sizes="(max-width: 640px) 72vw, (max-width: 1024px) 400px, 430px" className="object-cover" />
+                </div>
               </div>
-              <div className="relative aspect-[4/5]">
-                <Image src="/previews/hero-identity.webp" alt="ITZ-DONE brand identity applied to a glass office entrance" fill priority sizes="(max-width: 640px) 72vw, (max-width: 1024px) 400px, 430px" className="object-cover" />
+              <div className="hero-card-secondary">
+                <div className="relative aspect-[3/4]">
+                  <Image src="/previews/hero-campaign.webp" alt="An expressive orange GOH Graphix social media campaign design" fill sizes="(max-width: 640px) 43vw, 250px" className="object-cover" />
+                </div>
+              </div>
+              <div className="hero-sticker" aria-hidden="true">
+                <Sparkles size={24} className="mx-auto mb-2" />
+                <p className="font-display text-xs font-bold leading-5 sm:text-sm">Made<br />for you.</p>
               </div>
             </div>
-            <div className="hero-card-secondary">
-              <div className="relative aspect-[3/4]">
-                <Image src="/previews/hero-campaign.webp" alt="An expressive orange GOH Graphix social media campaign design" fill sizes="(max-width: 640px) 43vw, 250px" className="object-cover" />
-              </div>
-            </div>
-            <div className="hero-sticker" aria-hidden="true">
-              <Sparkles size={24} className="mx-auto mb-2" />
-              <p className="font-display text-xs font-bold leading-5 sm:text-sm">Made<br />for you.</p>
-            </div>
-            <p className="absolute bottom-0 left-[8%] text-[10px] font-semibold uppercase tracking-[0.13em] text-muted">A little strategy. A lot of character.</p>
+            <p className="mt-3 px-4 text-center text-[10px] font-semibold uppercase leading-5 tracking-[0.13em] text-muted">A little strategy. A lot of character.</p>
           </div>
         </div>
 

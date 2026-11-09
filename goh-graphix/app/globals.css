@@ -204,13 +204,16 @@ summary {
 }
 
 .hero-stage {
-  position: relative;
   min-width: 0;
-  height: clamp(24rem, 39vw, 33rem);
+}
+
+.hero-collage {
+  position: relative;
+  padding-block: clamp(2rem, 5vw, 3rem);
   isolation: isolate;
 }
 
-.hero-stage::before {
+.hero-collage::before {
   position: absolute;
   inset: 8% 3% 7% 2%;
   z-index: -1;
@@ -220,8 +223,7 @@ summary {
 }
 
 .hero-card-primary {
-  position: absolute;
-  top: 11%;
+  position: relative;
   left: 5%;
   width: 72%;
   transform: rotate(-7deg);
@@ -235,7 +237,7 @@ summary {
 .hero-card-secondary {
   position: absolute;
   right: 2%;
-  bottom: 3%;
+  bottom: 8%;
   width: 43%;
   transform: rotate(8deg);
   overflow: hidden;

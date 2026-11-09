@@ -1,17 +1,53 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { testimonials } from "@/lib/data";
 import FadeIn from "@/components/ui/FadeIn";
+import { useMediaQuery } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
+
+const ROTATION_DELAY = 2000;
 
 export default function TestimonialsSection() {
   const [index, setIndex] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const [keyboardFocused, setKeyboardFocused] = useState(false);
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const rotating = !reduceMotion && !hovered && !keyboardFocused;
   const testimonial = testimonials[index];
 
+  useEffect(() => {
+    if (!rotating) return;
+
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+    const scheduleNext = () => {
+      clearTimeout(timeout);
+      if (document.hidden) return;
+      timeout = setTimeout(() => {
+        setIndex((current) => (current + 1) % testimonials.length);
+      }, ROTATION_DELAY);
+    };
+
+    scheduleNext();
+    document.addEventListener("visibilitychange", scheduleNext);
+    return () => {
+      clearTimeout(timeout);
+      document.removeEventListener("visibilitychange", scheduleNext);
+    };
+  }, [index, rotating]);
+
   return (
-    <section aria-labelledby="testimonials-title" className="section-pad bg-paper relative overflow-hidden">
+    <section
+      aria-labelledby="testimonials-title"
+      aria-roledescription="carousel"
+      className="section-pad bg-paper relative overflow-hidden"
+      onPointerEnter={(event) => { if (event.pointerType === "mouse") setHovered(true); }}
+      onPointerLeave={(event) => { if (event.pointerType === "mouse") setHovered(false); }}
+      onPointerCancel={() => setHovered(false)}
+      onFocusCapture={(event) => setKeyboardFocused(event.target.matches(":focus-visible"))}
+      onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setKeyboardFocused(false); }}
+    >
       <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
 
       <div className="container-xl relative z-10">
@@ -67,14 +103,12 @@ export default function TestimonialsSection() {
 
           {/* ── Right: Active testimonial card ── */}
           <FadeIn delay={150} direction="left">
-            <div className="relative">
+            <div id="testimonial-slide" aria-live={rotating ? "off" : "polite"} aria-atomic="true" className="relative">
               {/* Background card offset */}
               <div className="absolute inset-0 bg-brand-blue/10 rounded-3xl translate-x-3 translate-y-3" aria-hidden="true" />
 
               <div
                 key={index}
-                aria-live="polite"
-                aria-atomic="true"
                 className="relative bg-white rounded-3xl p-6 sm:p-9 border border-line shadow-[0_8px_60px_rgba(0,0,0,.08)]"
                 style={{ animation: "fadeIn .4s ease" }}
               >
